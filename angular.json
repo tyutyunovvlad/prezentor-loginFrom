@@ -1,0 +1,142 @@
+{
+  "version": 1,
+  "projects": {
+    "login-form": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/login-form",
+      "sourceRoot": "apps/login-form/src",
+      "prefix": "prezentor",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/login-form",
+            "index": "apps/login-form/src/index.html",
+            "main": "apps/login-form/src/main.ts",
+            "polyfills": "apps/login-form/src/polyfills.ts",
+            "tsConfig": "apps/login-form/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/login-form/src/favicon.ico",
+              "apps/login-form/src/assets"
+            ],
+            "styles": ["apps/login-form/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/login-form/src/environments/environment.ts",
+                  "with": "apps/login-form/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "login-form:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "login-form:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "login-form:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/login-form/tsconfig.app.json",
+              "apps/login-form/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/login-form/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/login-form/jest.config.js",
+            "tsConfig": "apps/login-form/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "apps/login-form/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "login-form-e2e": {
+      "root": "apps/login-form-e2e",
+      "sourceRoot": "apps/login-form-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/login-form-e2e/cypress.json",
+            "tsConfig": "apps/login-form-e2e/tsconfig.e2e.json",
+            "devServerTarget": "login-form:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "login-form:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/login-form-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/login-form-e2e/**"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular",
+    "analytics": false
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "login-form"
+}
