@@ -1,0 +1,61 @@
+@mixin flex() {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.login-form__wrapper {
+  @include flex();
+  width: 500px;
+  padding: 45px 40px;
+
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  border-radius: 2px;
+  background-color: #fff;
+
+  .title {
+    margin-bottom: 20px;
+  }
+
+  form {
+    @include flex();
+
+    label {
+      @include flex();
+
+      input {
+        margin: 10px 0 20px 0;
+        padding: 20px 10px;
+        font-size: 1.2rem;
+
+      }
+    }
+
+    button {
+      color: white;
+      font-weight: bold;
+      font-size: 1.2rem;
+      background-color: rgb(36, 33, 43);
+      transition: all ease-in-out .3s;
+
+      border: none;
+      border-radius: 100px;
+      padding: 16px 8px;
+      max-width: 30%;
+
+      &:hover {
+          background-color: green;
+      }
+    }
+
+  }
+}
