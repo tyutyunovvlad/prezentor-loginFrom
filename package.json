@@ -25,11 +25,11 @@
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points"
+    "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
+    "json:server": "json-server --watch db.json"
   },
   "private": true,
   "dependencies": {
-    "@nrwl/angular": "9.2.2",
     "@angular/animations": "^9.1.0",
     "@angular/common": "^9.1.0",
     "@angular/compiler": "^9.1.0",
@@ -38,7 +38,10 @@
     "@angular/platform-browser": "^9.1.0",
     "@angular/platform-browser-dynamic": "^9.1.0",
     "@angular/router": "^9.1.0",
+    "@nrwl/angular": "9.2.2",
+    "angular-in-memory-web-api": "^0.10.0",
     "core-js": "^2.5.4",
+    "json-server": "^0.16.1",
     "rxjs": "~6.5.4",
     "zone.js": "^0.10.2"
   },

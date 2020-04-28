@@ -1,15 +1,16 @@
 <div class="login-form__wrapper">
   <h1 class="title">Account login</h1>
-  <form>
+  <form #myForm="ngForm" >
     <label>
-      E-mail
-      <input type="email" name="login" id="login" placeholder="example@mail.net" required>
+      E-mail <span *ngIf="emailError">This email is already taken</span>
+      <input [(ngModel)]="email" [ngClass]="{invalid: emailError}" type="email" name="login" id="login" placeholder="example@mail.net" #login="ngModel" pattern="[a-zA-Z_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}" required>
+      
     </label>
     <label>
       Password 
-      <input type="password" name="password" id="password" placeholder="password" required>
-    </label>
+      <input [(ngModel)]="password" type="password" name="password" id="password" placeholder="password" #passw="ngModel" required>
 
-    <button>Login</button>
+    </label>
+    <button form="ngForm" [disabled]="myForm.invalid" [ngClass]="{disabled: myForm.invalid}" (click)="submit()">Login</button>
   </form>
 </div>
