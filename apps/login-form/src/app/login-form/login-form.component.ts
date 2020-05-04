@@ -28,8 +28,11 @@ export class LoginFormComponent implements OnInit {
   }
 
   submit() {
-    this.getEmail(this.email); 
-    console.log('click')
+    this.getEmail(this.email)
+  }
+
+  onChange() {
+    this.emailError = false
   }
 
 }

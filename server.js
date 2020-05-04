@@ -5,22 +5,31 @@ const middlewares = jsonServer.defaults()
 
 server.use(middlewares)
 
-server.get('/test', (req, res) => {
-  res.json('test')
+
+server.use(jsonServer.rewriter({
+  // '/mails/:id' : '/'
+}))
+
+server.get(`/mails/:id`, (req, res) => {
+
+  let email = router.db
+    .get('mails')
+    .find({email: req.params.id})
+    .value()
+    
+  if (email) {
+    res.jsonp({exist:true})
+  } else {
+    res.jsonp({exist:false})
+  }
 })
 
-// server.get('/mails', (req, res) => {
-  
-// })
 
-// router.render = (req, res) => {
-//   res.jsonp({
-//     body: res.locals.data
-//   })
-// }
+
 
 
 server.use(router)
 server.listen(3000, () => {
-  console.log('JSON Server is running')
+  console.log('JSON Server is pucking')
 })
+
