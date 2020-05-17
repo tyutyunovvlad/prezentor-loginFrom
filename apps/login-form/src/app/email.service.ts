@@ -14,9 +14,15 @@ export class EmailService {
   getEmail(email:string): Observable<string> {
       return this.http.get<any>(`http://localhost:3000/mails/${email}`)
         .pipe(
-          tap(r => console.log(r.exist)),
+          // tap(r => console.log(r.exist)),
           mergeMap(r => iif(() => r.exist, of('true'), of('false') ))          
         )
+  }
+
+  addEmail(email:string): Observable<object> {
+
+    return this.http.post(`http://localhost:3000/mails/`, {email}  )
+      
   }
 
 }

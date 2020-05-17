@@ -24,6 +24,10 @@ server.get(`/mails/:id`, (req, res) => {
   }
 })
 
+// server.post(`/mails/:email`, (req,res) => {
+//   //
+// })
+
 
 
 

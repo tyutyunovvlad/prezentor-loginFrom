@@ -28,12 +28,13 @@
 
   form {
     @include flex();
+    position: relative;
 
     label {
       @include flex();
 
       input {
-        margin: 10px 0 20px 0;
+        margin: 10px 0 30px 0;
         padding: 20px 10px;
         font-size: 1.2rem;
 
@@ -64,8 +65,15 @@
 
 input.ng-touched.ng-invalid {border:solid red 2px;}
 input.ng-touched.ng-valid {border:solid green 2px;}
-input.ng-touched.invalid {border:solid red 2px;}
+button:disabled {
+  background-color: silver !important;
+}
 
-button.disabled {
-  background:red !important;
+.validation {
+  position: relative;
+  height: 0;
+  small {
+    position: relative;
+    top: -23px;
+  }
 }

@@ -1,16 +1,49 @@
 <div class="login-form__wrapper">
   <h1 class="title">Account login</h1>
-  <form #myForm="ngForm" >
+  <form #myForm="ngForm" [formGroup]="form" (ngSubmit)="submit()" >
     <label>
-      E-mail <span *ngIf="emailError">This email is already taken</span>
-      <input [(ngModel)]="email" [ngClass]="{invalid: emailError}" (change)="onChange()" type="email" name="login" id="login" placeholder="example@mail.net" #login="ngModel" pattern="[a-zA-Z_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}" required>
-      
+      E-mail
+      <input type="text" placeholder="example@mail.net" 
+        formControlName="email"
+        #email
+      >
     </label>
+      
+      <div
+        *ngIf="form.get('email').invalid && form.get('email').touched"
+        class="validation"
+      >
+        <small *ngIf="form.get('email').errors.required">
+          Required field
+        </small>
+
+        <small *ngIf="form.get('email').errors.email">
+          Email is incorrect
+        </small>
+
+        
+      </div>
+      <small *ngIf="emailTaken">
+        This email is already taken
+      </small>
+      
+    
     <label>
       Password 
-      <input [(ngModel)]="password"  type="password" name="password" id="password" placeholder="password" #passw="ngModel" required>
-
+      <input type="password" placeholder="password" formControlName="password">
     </label>
-    <button form="ngForm" [disabled]="myForm.invalid" [ngClass]="{disabled: myForm.invalid || this.emailError}" (click)="submit()">Login</button>
+    <div
+        *ngIf="form.get('password').invalid && form.get('password').touched"
+        class="validation"
+      >
+        <small *ngIf="form.get('password').errors.required">
+          Required field
+        </small>
+        <small *ngIf="form.get('password').errors.minlength">
+          Minimal length: {{form.get('password').errors.minlength.requiredLength}}
+        </small>
+    </div>
+
+    <button type="submit" [disabled]="myForm.invalid">Login</button>
   </form>
 </div>
